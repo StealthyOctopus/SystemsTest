@@ -1,13 +1,18 @@
 package core;
 
+import java.awt.Frame;
 import java.util.*;
 
-public class engine {
+public class engine implements Runnable {
 	private Map<TickableGroup, ArrayList<Tickable>> TickableObjectGroups;
+	
+	public ArrayList<ui.reactorWidget> Widgets = new ArrayList<ui.reactorWidget>();
 	
 	private float targetDeltaTime = 1.0f / 60.0f; 
 	private long lastMs = 0;
 	private boolean running;
+	private Thread t;
+	private ui.mainframe mainframe;
 	
 	public engine(int fps) {
 		//defaults to 60 fps
@@ -29,8 +34,30 @@ public class engine {
 		this.TickableObjectGroups.put(group, tickablesInGroup);
 	}
 	
-	public void Run()
+	public void updateUI()
 	{
+		for(ui.reactorWidget w : Widgets) {
+			w.update();
+		}
+	}
+
+	public void start (ui.mainframe mainframe) {
+		this.mainframe = mainframe;
+		
+		System.out.println("Starting engine thread");
+		if (t == null) {
+			t = new Thread (this, "Engine");
+			t.start ();
+		}
+	}
+	
+	public void shutdown()
+	{
+
+	}
+
+	@Override
+	public void run() {
 		this.running = true;
 		
 		while(this.running)
@@ -44,9 +71,28 @@ public class engine {
 					for(Tickable tickable : Group)
 					{
 						tickable.Tick(dt);
+						
+						if(tickable.getClass() == components.reactor.class)
+						{
+							components.reactor r = (components.reactor)tickable;
+							if(r != null) {
+								this.mainframe.SetReactorText("Reactor Output at " + r.GetPowerOutput() + " gigawatts");
+							}
+						}
 					}
 				}
+				
+				//Now update UI
+				updateUI();
+				
 				this.lastMs = now;
+			}
+			
+			try {
+				Thread.sleep((long) this.targetDeltaTime);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
