@@ -14,7 +14,7 @@ public class engine {
 		this.targetDeltaTime = fps > 0 ? 1.0f / (float)fps : 1.0f / 60.0f;
 		this.running = false;
 		this.TickableObjectGroups = new HashMap<TickableGroup, ArrayList<Tickable>>();
-		this.lastMs = 0;
+		this.lastMs = System.currentTimeMillis();
 	}
 	
 	public void AddTickable(Tickable tickable, TickableGroup group)

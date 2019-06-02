@@ -16,7 +16,7 @@ public class reactor implements core.Tickable {
 	public reactor(float output)
 	{
 		this.powerOutput = output;
-		this.powerUpSpeed = 1.0f;
+		this.powerUpSpeed = 200.0f;
 		this.state = ReactorState.State_Off;
 		this.currentPowerOutput = 0.0f;
 	}
@@ -79,6 +79,6 @@ public class reactor implements core.Tickable {
 		GeneratePower(dt);
 		
 		//Do a print for now
-		System.out.println("Reactor power output: " + GetPowerOutput() * dt);
+		System.out.println("Reactor power output: " + GetPowerOutput());
 	}
 }

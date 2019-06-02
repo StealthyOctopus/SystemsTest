@@ -7,7 +7,7 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Creating Engine");
-		core.engine e = new core.engine(60);
+		core.engine e = new core.engine(30);
 		
 		System.out.println("Creating reactor...");
 		
