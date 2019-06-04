@@ -1,20 +1,19 @@
 package core;
 
-import java.awt.Frame;
 import java.util.*;
 
-public class engine implements Runnable {
+public class Engine implements Runnable {
 	private Map<TickableGroup, ArrayList<Tickable>> TickableObjectGroups;
 	
-	public ArrayList<ui.reactorWidget> Widgets = new ArrayList<ui.reactorWidget>();
+	public ArrayList<ui.ReactorWidget> Widgets = new ArrayList<ui.ReactorWidget>();
 	
 	private float targetDeltaTime = 1.0f / 60.0f; 
 	private long lastMs = 0;
 	private boolean running;
 	private Thread t;
-	private ui.mainframe mainframe;
+	private ui.Mainframe mainframe;
 	
-	public engine(int fps) {
+	public Engine(int fps) {
 		//defaults to 60 fps
 		this.targetDeltaTime = fps > 0 ? 1.0f / (float)fps : 1.0f / 60.0f;
 		this.running = false;
@@ -36,12 +35,12 @@ public class engine implements Runnable {
 	
 	public void updateUI()
 	{
-		for(ui.reactorWidget w : Widgets) {
+		for(ui.ReactorWidget w : Widgets) {
 			w.update();
 		}
 	}
 
-	public void start (ui.mainframe mainframe) {
+	public void start (ui.Mainframe mainframe) {
 		this.mainframe = mainframe;
 		
 		System.out.println("Starting engine thread");
@@ -70,13 +69,16 @@ public class engine implements Runnable {
 				{
 					for(Tickable tickable : Group)
 					{
-						tickable.Tick(dt);
-						
-						if(tickable.getClass() == components.reactor.class)
+						if(tickable != null)
 						{
-							components.reactor r = (components.reactor)tickable;
-							if(r != null) {
-								this.mainframe.SetReactorText("Reactor Output at " + r.GetPowerOutput() + " gigawatts");
+							tickable.Tick(dt);
+							
+							if(tickable.getClass() == components.Reactor.class)
+							{
+								components.Reactor r = (components.Reactor)tickable;
+								if(r != null) {
+									this.mainframe.SetReactorText("Reactor Output at " + r.GetPowerOutput() + " gigawatts");
+								}
 							}
 						}
 					}

@@ -1,13 +1,13 @@
 package components;
 
-public class powerStore implements core.Tickable{
+public class PowerStore implements core.Tickable{
 	private float currentPowerStore;
 	private float powerStorage;
 	private float timeToDecay;
 	private float decayRate;
 	private float decayTimer;
 	
-	public powerStore(float maxStorage, float timeToDecay, float decayRate)
+	public PowerStore(float maxStorage, float timeToDecay, float decayRate)
 	{
 		this.powerStorage = maxStorage;
 		this.timeToDecay = timeToDecay;
@@ -70,8 +70,8 @@ public class powerStore implements core.Tickable{
 	
 	@Override
 	public void Tick(float dt) {
-		// TODO Auto-generated method stub
-		HandleDecay(dt);
+		if(this.decayTimer > 0.0f)
+			HandleDecay(dt);
 	}
 
 }

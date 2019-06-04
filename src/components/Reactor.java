@@ -1,6 +1,6 @@
 package components;
 
-public class reactor implements core.Tickable {
+public class Reactor implements core.Tickable {
 
 	private float powerOutput;
 	private float powerUpSpeed;
@@ -13,7 +13,7 @@ public class reactor implements core.Tickable {
 		return this.currentPowerOutput;
 	}
 	
-	public reactor(float output)
+	public Reactor(float output)
 	{
 		this.powerOutput = output;
 		this.powerUpSpeed = 200.0f;

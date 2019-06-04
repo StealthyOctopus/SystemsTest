@@ -5,7 +5,7 @@ import java.awt.Label;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class mainframe extends Frame {
+public class Mainframe extends Frame {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class mainframe extends Frame {
 	
 	private Label ReactorStatusLabel;
 	
-	public mainframe() {
+	public Mainframe() {
 		setTitle("Mainframe");
 		setSize(640,300);
 		//

@@ -10,20 +10,20 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class reactorWidget extends Panel implements ActionListener{
+public class ReactorWidget extends Panel implements ActionListener{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private components.reactor reactorRef;
+	private components.Reactor reactorRef;
 	
 	private Button button;
 	private Label label;
 	private Label outputLabel;
 	
-	public reactorWidget(components.reactor reactorRef, ui.mainframe f) {
+	public ReactorWidget(components.Reactor reactorRef, ui.Mainframe f) {
 		
 		this.reactorRef = reactorRef;
 		this.label = new Label("Reactor");
