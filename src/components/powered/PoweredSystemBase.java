@@ -8,6 +8,20 @@ public class PoweredSystemBase implements PowerDraw, Tickable {
 	protected float allowedPowerDraw = 0.0f;
 	protected float percentageDraw = 0.0f;
 	
+	protected String ID;
+	
+	public void setID(final String ID) {
+		this.ID = ID;
+	}
+	
+	public final String getID() {
+		return this.ID;
+	}
+	
+	public PoweredSystemBase(String ID) {
+		this.ID = ID;
+	}
+	
 	@Override
 	public void Tick(float dt) {
 		// TODO Auto-generated method stub
