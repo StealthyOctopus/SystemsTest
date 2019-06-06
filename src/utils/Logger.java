@@ -8,7 +8,7 @@ public class Logger {
 	private static Logger instance = null; 
 	  
     // protected constructor
-    protected Logger() 
+	private Logger() 
     { 
     } 
   

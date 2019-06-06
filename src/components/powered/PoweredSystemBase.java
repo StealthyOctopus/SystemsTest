@@ -31,7 +31,7 @@ public class PoweredSystemBase implements PowerDraw, Tickable {
 	@Override
 	public float getRequestedPowerDraw() {
 		// TODO Auto-generated method stub
-		return this.allowedPowerDraw;
+		return this.requiredPowerDraw;
 	}
 
 	@Override

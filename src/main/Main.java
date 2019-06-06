@@ -1,5 +1,7 @@
 package main;
 
+import components.PowerManager;
+import components.powered.LifeSupportSystem;
 import core.TickableGroup;
 import utils.Logger;
 
@@ -22,18 +24,29 @@ public class Main {
 		
 		logger.LogString("Creating reactor...");
 		
-		components.Reactor r = new components.Reactor(1000.0f);
+		components.Reactor r = new components.Reactor(100.0f/*initial power output*/, 1000.0f/*max power output*/);
 		
-		logger.LogString("Initialising reactor...");
+		//add reactor to tickables 
+		e.AddTickable(r, TickableGroup.Default);
 		
+		logger.LogString("creating power management system...");
+		
+		PowerManager p = new PowerManager(r);
+		
+		LifeSupportSystem l = new LifeSupportSystem("Life_Support");
+		
+		//add life support to tickables 
+		e.AddTickable(l, TickableGroup.Default);
+		
+		//add initial systems to power manager
+		p.AddPoweredSystem(l);
+		
+		//add power manager to tickables
+		e.AddTickable(p, TickableGroup.Default);
 		
 		//Create our basic UI widgets, passing our various components in where appropriate
 		ui.ReactorWidget rw = new ui.ReactorWidget(r, m);
 		e.Widgets.add(rw);
-		
-		logger.LogString("Adding reactor to tickable list");
-		
-		e.AddTickable(r, TickableGroup.Default);
 		
 		logger.LogString("Starting Engine...");
 		

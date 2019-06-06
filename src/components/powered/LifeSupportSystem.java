@@ -3,8 +3,10 @@ package components.powered;
 public class LifeSupportSystem extends PoweredSystemBase {
 
 	public LifeSupportSystem(String ID) {
-		super(ID);
-		// TODO Auto-generated constructor stub
+		super(ID);		
+		
+		//default power draw //TODO:remove magic number
+		requiredPowerDraw = 400.0f;
 	}
 
 	@Override

@@ -6,6 +6,7 @@ public class Reactor implements core.Tickable {
 	private float powerUpSpeed;
 	private float powerDownSpeed;
 	private float currentPowerOutput;
+	private float maxPowerOutput;
 	
 	private ReactorState state;
 	
@@ -13,9 +14,10 @@ public class Reactor implements core.Tickable {
 		return this.currentPowerOutput;
 	}
 	
-	public Reactor(float output)
+	public Reactor(float initialOutput, float maxPowerOutput)
 	{
-		this.powerOutput = output;
+		this.powerOutput = initialOutput;
+		this.maxPowerOutput = maxPowerOutput;
 		this.powerUpSpeed = 200.0f;
 		this.powerDownSpeed = 400.0f;
 		this.state = ReactorState.State_Off;
@@ -37,6 +39,23 @@ public class Reactor implements core.Tickable {
 		this.state = ReactorState.State_Off;
 	}
 	
+	public boolean tryAdjustOutput(final float adjustment) {
+		
+		//save calculating twice 
+		final float adjustedOutput = this.powerOutput + adjustment;
+		
+		//will this adjustment be within bounds
+		boolean success = adjustedOutput >= 0.0f && adjustedOutput <= this.maxPowerOutput;
+		
+		//make sure we don't exceed max
+		this.powerOutput = Math.min(adjustedOutput, this.maxPowerOutput);
+		
+		//cannot be less than 0
+		this.powerOutput = Math.max(this.powerOutput, 0.0f);
+		
+		return success;
+	}
+	
 	private void GeneratePower(float dt)
 	{
 		switch(this.state)
@@ -56,7 +75,7 @@ public class Reactor implements core.Tickable {
 	}
 	
 	private void State_On(float dt) {
-		if(this.currentPowerOutput < this.powerOutput)
+		if(this.currentPowerOutput != this.powerOutput)
 		{
 			this.currentPowerOutput += this.powerUpSpeed * dt;
 			//clamp
