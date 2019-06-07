@@ -3,6 +3,7 @@ package components.controllers;
 import components.ReactorState;
 import components.models.ReactorModel;
 import ui.ReactorView;
+import utils.Logger;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +59,7 @@ public class ReactorController implements core.Tickable, ActionListener{
             return false;
 
         //save calculating twice
-        final float adjustedOutput = this.reactorModel.getCurrentPowerOutput() + adjustment;
+        final float adjustedOutput = this.reactorModel.getTargetOutput() + adjustment;
 
         //will this adjustment be within bounds
         boolean success = adjustedOutput >= 0.0f && adjustedOutput <= this.reactorModel.getMaxPowerOutput();
@@ -67,9 +68,11 @@ public class ReactorController implements core.Tickable, ActionListener{
         this.reactorModel.setTargetOutput(Math.min(adjustedOutput, this.reactorModel.getMaxPowerOutput()));
 
         //cannot be less than 0
-        this.reactorModel.setTargetOutput(Math.max(this.reactorModel.getCurrentPowerOutput(), 0.0f));
+        this.reactorModel.setTargetOutput(Math.max(this.reactorModel.getTargetOutput(), 0.0f));
 
         this.latestPowerDelta = adjustment;
+
+        Logger.getInstance().LogString("" + this.latestPowerDelta);
 
         return success;
     }

@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c60eee79-4c16-43f0-b609-68c73b8077a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/controllers/ReactorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/MainDialog.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/MainDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/ReactorView.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/ReactorView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PowerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PowerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Reactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/models/ReactorModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/Mainframe.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ReactorWidget.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/controllers/ReactorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/controllers/ReactorController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -52,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/PowerManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="55" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
+            <state relative-caret-position="425">
+              <caret line="78" selection-start-line="78" selection-end-line="78" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -137,8 +126,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/controllers/ReactorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="63" column="40" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="40" />
+            <state relative-caret-position="85">
+              <caret line="57" column="37" lean-forward="true" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -266,6 +255,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -365,12 +355,12 @@
       <option name="presentableId" value="Default" />
       <updated>1559894022754</updated>
       <workItem from="1559894025236" duration="239000" />
-      <workItem from="1559894306699" duration="12648000" />
+      <workItem from="1559894306699" duration="13502000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12887000" />
+    <option name="totallyTimeSpent" value="13741000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -385,7 +375,7 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17857143" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17857143" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -396,7 +386,7 @@
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3290461" />
       <window_info anchor="bottom" id="Run" order="3" />
-      <window_info anchor="bottom" id="Debug" order="4" visible="true" weight="0.37084672" />
+      <window_info active="true" anchor="bottom" id="Debug" order="4" visible="true" weight="0.37084672" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.3290461" />
@@ -490,16 +480,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/PowerManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="55" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/models/ReactorModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -573,10 +553,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PowerManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/controllers/ReactorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="63" column="40" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="40" />
+        <state relative-caret-position="85">
+          <caret line="57" column="37" lean-forward="true" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
