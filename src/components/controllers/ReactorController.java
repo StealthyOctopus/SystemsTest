@@ -72,8 +72,6 @@ public class ReactorController implements core.Tickable, ActionListener{
 
         this.latestPowerDelta = adjustment;
 
-        Logger.getInstance().LogString("" + this.latestPowerDelta);
-
         return success;
     }
 
