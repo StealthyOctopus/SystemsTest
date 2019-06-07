@@ -5,13 +5,11 @@ import java.util.*;
 public class Engine implements Runnable {
 	private Map<TickableGroup, ArrayList<Tickable>> TickableObjectGroups;
 	
-	public ArrayList<ui.ReactorWidget> Widgets = new ArrayList<ui.ReactorWidget>();
-	
 	private float targetDeltaTime = 1.0f / 60.0f; 
 	private long lastMs = 0;
 	private boolean running;
 	private Thread t;
-	private ui.Mainframe mainframe;
+	private ui.MainDialog window;
 	
 	public Engine(int fps) {
 		//defaults to 60 fps
@@ -35,13 +33,10 @@ public class Engine implements Runnable {
 	
 	public void updateUI()
 	{
-		for(ui.ReactorWidget w : Widgets) {
-			w.update();
-		}
 	}
 
-	public void start (ui.Mainframe mainframe) {
-		this.mainframe = mainframe;
+	public void start (ui.MainDialog window) {
+		this.window = window;
 		
 		System.out.println("Starting engine thread");
 		if (t == null) {
@@ -72,21 +67,10 @@ public class Engine implements Runnable {
 						if(tickable != null)
 						{
 							tickable.Tick(dt);
-							
-							if(tickable.getClass() == components.Reactor.class)
-							{
-								components.Reactor r = (components.Reactor)tickable;
-								if(r != null) {
-									this.mainframe.SetReactorText("Reactor Output at " + r.GetPowerOutput() + " gigawatts");
-								}
-							}
 						}
 					}
 				}
-				
-				//Now update UI
-				updateUI();
-				
+
 				this.lastMs = now;
 			}
 			

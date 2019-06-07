@@ -2,21 +2,22 @@ package components;
 
 import java.util.*;
 
+import components.controllers.ReactorController;
+import components.controllers.ReactorController;
 import core.Tickable;
-import utils.Logger;
 import components.powered.*;
 
 public class PowerManager implements Tickable {
 	
-	private Reactor reactor = null;
+	private ReactorController reactorController = null;
 	private float generatedPower = 0.0f;
 	
 	//map our powered systems by priority, with the array list allowing us to have several systems at the same priority
 	private Map<Integer, ArrayList<PoweredSystemBase>> poweredSystems;
 		
-	public PowerManager(Reactor reactor)
+	public PowerManager(ReactorController reactorController)
 	{
-		this.reactor = reactor;
+		this.reactorController = reactorController;
 		this.poweredSystems = new HashMap<Integer, ArrayList<PoweredSystemBase>>();
 	}
 	
@@ -42,12 +43,13 @@ public class PowerManager implements Tickable {
 	@Override
 	public void Tick(float dt) {
 		//check we have a valid ref and that the reactor is on
-		if(this.reactor == null || this.reactor.GetState() != ReactorState.State_On) {
+		if(this.reactorController == null || !this.reactorController.isPoweredOn()) {
 			return;
 		}
 		
 		//get the amount of power we have to share, this will be reduced as we transfer the power to systems
-		this.generatedPower = this.reactor.GetPowerOutput();
+		this.generatedPower = this.reactorController.getCurrentPowerOutput();
+		//save this value to compare what we made use of verses the reactors current output
 		final float powerDrawnFromReactor = this.generatedPower;
 		
 		//build up the total power requested by all systems, so that we can adjust the reactors output
@@ -71,7 +73,7 @@ public class PowerManager implements Tickable {
 		
 		//attempt to make the adjustment (function returns a success value, but currently not used)
 		//TODO: in future we could check how many times our adjustments have failed and look to turn off a system
-		this.reactor.tryAdjustOutput(-powerDiff);
+		this.reactorController.tryAdjustOutput(-powerDiff);
 		
 		//if we have too much power, consider storing it as a buffer in case the output is too low in future
 		if(powerDiff > 0.0f) {
@@ -81,7 +83,7 @@ public class PowerManager implements Tickable {
 	}
 	
 	public float getPowerOutput() {
-		return (this.reactor != null) ? this.reactor.GetPowerOutput() : 0.0f;
+		return (this.reactorController != null) ? this.reactorController.getCurrentPowerOutput() : 0.0f;
 	}
 	
 	private final float getSystemsRequestedPower(PoweredSystemBase system) {
