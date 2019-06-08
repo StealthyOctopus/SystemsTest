@@ -1,6 +1,7 @@
 package components.models;
 
 import core.Tickable;
+import utils.Logger;
 
 public class LifeSupportModel extends PoweredSystemModel implements Tickable
 {
@@ -12,6 +13,7 @@ public class LifeSupportModel extends PoweredSystemModel implements Tickable
     //Values are per second
     private float reductionPerPerson = 5.0f;
     private float energyCostPerPerson = 20.0f;
+    private float minPercentToMaintainQuality = 0.5f;//50%
 
     private int numberOfPeople;
 
@@ -20,15 +22,36 @@ public class LifeSupportModel extends PoweredSystemModel implements Tickable
         this.setNumberOfPeople(numberOfPeople);
     }
 
+    public float getCurrentAirQuality()
+    {
+        return this.currentAirQuality;
+    }
+
+    private void setCurrentAirQualityClamped(float newAirQuality)
+    {
+        //ensure it is within bounds
+        if(newAirQuality > 100.0f)
+        {
+            newAirQuality = 100.0f;
+        }
+        else if(newAirQuality < 0.0f)
+        {
+            newAirQuality = 0.0f;
+        }
+
+        //finally set
+        this.currentAirQuality = newAirQuality;
+    }
+
     public boolean isAirSafe()
     {
-        return currentAirQuality > airQualityDangerLevel;
+        return this.currentAirQuality > airQualityDangerLevel;
     }
 
     public void setNumberOfPeople(int numberOfPeople)
     {
         this.numberOfPeople = numberOfPeople;
-        this.requiredPowerDraw = this.energyCostPerPerson * numberOfPeople;
+        this.setRequiredPowerDraw(this.energyCostPerPerson * numberOfPeople);
     }
 
     public int getNumberOfPeople()
@@ -39,28 +62,27 @@ public class LifeSupportModel extends PoweredSystemModel implements Tickable
     @Override
     public void Tick(float dt)
     {
-        //handle reduction coming from people existing
-        reduceAirQuality(dt);
-
-        //attempt to recover
+        //filter air quality
         filterAir(dt);
 
         //notify listener if bound
         notifyListenerIfBound();
     }
 
-    private void reduceAirQuality(float dt)
-    {
-        //decrease air quality based on number of people
-        float decrease = (this.numberOfPeople * this.reductionPerPerson * dt);
-        this.currentAirQuality = Math.max(this.currentAirQuality - decrease, 0.0f);
-    }
-
     //improve air quality
     private void filterAir(float dt)
     {
-        //at 100% of our required power draw we can completely negate the air quality reduction of each person
-        float increase = (this.numberOfPeople * this.reductionPerPerson * dt) * this.percentageDraw;
-        this.currentAirQuality = Math.min(this.currentAirQuality + increase, 100.0f);
+        //normalise percentage value before making calculations
+        float normalisedPercentage = this.percentageDraw / 100.0f;
+
+        //below a certain power level, quality will drop based on the number of people
+        //above a certain percentage of power the quality will start to recover
+        float changeInQuality = (normalisedPercentage - this.minPercentToMaintainQuality) * this.reductionPerPerson * this.numberOfPeople;
+
+        //Get new air quality after the change
+        float newAirQuality = this.currentAirQuality + changeInQuality;
+
+        //finally update our currentAirQuality var, ensuring it is within bounds
+        this.setCurrentAirQualityClamped(newAirQuality);
     }
 }

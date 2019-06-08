@@ -106,7 +106,7 @@ public class PowerManager implements Tickable
     {
         if (system != null) {
             final float powerRequested = this.getSystemsRequestedPower(system);
-            final float powerAllowed = (powerRequested >= this.generatedPower) ? powerRequested : this.generatedPower;
+            final float powerAllowed = (powerRequested <= this.generatedPower) ? powerRequested : this.generatedPower;
             system.setAllowedPowerDraw(powerAllowed);
 
             //the power has now been used

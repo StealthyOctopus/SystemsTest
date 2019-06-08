@@ -90,6 +90,11 @@ public class ReactorModel implements Tickable
         return this.state;
     }
 
+    public void setMaxPowerOutput(float maxPowerOutput)
+    {
+        this.maxPowerOutput = maxPowerOutput;
+    }
+
     public void setState(ReactorState state)
     {
         if(state != this.state)
@@ -191,7 +196,6 @@ public class ReactorModel implements Tickable
 
     private void State_On(float dt)
     {
-        Logger.getInstance().LogString("Target: " + getTargetOutput());
         final float currentOutput = this.getCurrentPowerOutput();
         if (currentOutput < this.getTargetOutput())
         {

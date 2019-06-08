@@ -5,10 +5,12 @@ import components.models.ModelListenerInterface;
 import components.models.ReactorModel;
 import ui.ReactorView;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ReactorController implements ActionListener, ModelListenerInterface
+public class ReactorController implements ActionListener, ModelListenerInterface, ChangeListener
 {
     private ReactorModel reactorModel;
     private ReactorView reactorView;
@@ -25,8 +27,16 @@ public class ReactorController implements ActionListener, ModelListenerInterface
 
         if (this.reactorView != null)
         {
+            if(this.reactorModel != null)
+            {
+                this.reactorView.getMaxPowerSlider().setValue((int)this.reactorModel.getMaxPowerOutput());
+            }
             this.reactorView.getToggleButton().addActionListener(this::actionPerformed);
+            this.reactorView.getMaxPowerSlider().addChangeListener(this::stateChanged);
         }
+
+        //set initial values
+        OnModelUpdated();
     }
 
     public void actionPerformed(ActionEvent e)
@@ -44,9 +54,19 @@ public class ReactorController implements ActionListener, ModelListenerInterface
     public void OnModelUpdated()
     {
         //model has changed, update view
-        if(this.reactorView != null)
+        if(this.reactorView != null && this.reactorModel != null)
         {
-            this.reactorView.UpdateReactorInformation(this.reactorModel.getStateString(), this.reactorModel.getCurrentPowerOutput(), this.reactorModel.getLatestPowerDelta());
+            this.reactorView.UpdateReactorModel(this.reactorModel);
+        }
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent changeEvent)
+    {
+        if(this.reactorView != null && this.reactorModel != null)
+        {
+            int newValue = this.reactorView.getMaxPowerSlider().getValue();
+            this.reactorModel.setMaxPowerOutput(newValue);
         }
     }
 }

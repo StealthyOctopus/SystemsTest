@@ -1,21 +1,34 @@
 package ui;
 
-import javax.swing.*;
+import components.models.ReactorModel;
 
-public class ReactorView
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+public class ReactorView implements ChangeListener
 {
     private JPanel contentPane;
     private JLabel ReactorPowerDelta;
     private JLabel ReactorStatus;
     private JLabel ReactorOutput;
     private JButton ToggleStateButton;
+    private JSlider maxPowerSlider;
+    private JLabel maxPowerLabel;
+    private JPanel rootPanel;
+
+    public ReactorView()
+    {
+        this.maxPowerSlider.addChangeListener(this::stateChanged);
+    }
 
     //Update UI with reactors state public
-    public void UpdateReactorInformation(String stateStr, float output, float delta)
+    public void UpdateReactorModel(ReactorModel model)
     {
-        this.ReactorStatus.setText(stateStr);
-        this.ReactorOutput.setText(String.format("%.2f", output));
-        this.ReactorPowerDelta.setText(String.format("%.2f", delta));
+        this.ReactorStatus.setText(model.getStateString());
+        this.ReactorOutput.setText(String.format("%.2f", model.getCurrentPowerOutput()));
+        this.ReactorPowerDelta.setText(String.format("%.2f", model.getLatestPowerDelta()));
+        this.maxPowerLabel.setText(String.format("%f", model.getMaxPowerOutput()));
     }
 
     public void setButtonText(String text)
@@ -25,11 +38,23 @@ public class ReactorView
 
     public JButton getToggleButton()
     {
-        return ToggleStateButton;
+        return this.ToggleStateButton;
     }
 
     public JPanel getPanel()
     {
-        return contentPane;
+        return this.rootPanel;
+    }
+
+    public JSlider getMaxPowerSlider()
+    {
+        return this.maxPowerSlider;
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent changeEvent)
+    {
+         int newValue = this.maxPowerSlider.getValue();
+         this.maxPowerLabel.setText(String.format("%.2f", (float)newValue));
     }
 }

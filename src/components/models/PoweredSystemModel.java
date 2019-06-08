@@ -60,17 +60,26 @@ public class PoweredSystemModel implements PoweredModelInterface
     public void setAllowedPowerDraw(float allowedPowerDraw)
     {
         this.allowedPowerDraw = allowedPowerDraw;
+        //recalculate percentage
+        this.calculatePercentagePowerDraw();
     }
 
     @Override
     public void setRequiredPowerDraw(float requiredPowerDraw)
     {
         this.requiredPowerDraw = requiredPowerDraw;
+        //recalculate percentage
+        this.calculatePercentagePowerDraw();
     }
 
     @Override
     public void setPercentageDraw(float percentageDraw)
     {
         this.percentageDraw = percentageDraw;
+    }
+
+    protected void calculatePercentagePowerDraw()
+    {
+        this.percentageDraw = (this.requiredPowerDraw > 0.0f) ? (this.allowedPowerDraw / this.requiredPowerDraw) * 100.0f : this.percentageDraw;
     }
 }
