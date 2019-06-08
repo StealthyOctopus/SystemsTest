@@ -1,5 +1,6 @@
 package core;
 
-public interface Tickable {
-	void Tick(float dt);
+public interface Tickable
+{
+    void Tick(float dt);
 }

@@ -1,7 +1,8 @@
 package core;
 
-public enum TickableGroup {
-	Priority,
-	Default,
-	Low
+public enum TickableGroup
+{
+    Priority,
+    Default,
+    Low
 }

@@ -2,7 +2,8 @@ package ui;
 
 import javax.swing.*;
 
-public class ReactorView {
+public class ReactorView
+{
     private JPanel contentPane;
     private JLabel ReactorPowerDelta;
     private JLabel ReactorStatus;
@@ -10,21 +11,25 @@ public class ReactorView {
     private JButton ToggleStateButton;
 
     //Update UI with reactors state public
-    public void UpdateReactorInformation(String stateStr, float output, float delta) {
+    public void UpdateReactorInformation(String stateStr, float output, float delta)
+    {
         this.ReactorStatus.setText(stateStr);
         this.ReactorOutput.setText(String.format("%.2f", output));
         this.ReactorPowerDelta.setText(String.format("%.2f", delta));
     }
 
-    public void setButtonText(String text) {
+    public void setButtonText(String text)
+    {
         this.ToggleStateButton.setText(text);
     }
 
-    public JButton getToggleButton() {
+    public JButton getToggleButton()
+    {
         return ToggleStateButton;
     }
 
-    public JPanel getPanel() {
+    public JPanel getPanel()
+    {
         return contentPane;
     }
 }
