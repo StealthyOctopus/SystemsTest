@@ -7,6 +7,7 @@ import ui.ReactorView;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,7 +35,12 @@ public class ReactorController implements ActionListener, ModelListenerInterface
             //set our initial slider value
             if(this.reactorModel != null)
             {
+                //set sliders max to match model
                 this.reactorView.getMaxPowerSlider().setValue((int)this.reactorModel.getMaxPowerOutput());
+
+                //set colour to match state
+                setStatusText();
+
             }
 
             //Bind to reactors on/off button
@@ -46,6 +52,19 @@ public class ReactorController implements ActionListener, ModelListenerInterface
 
         //set initial values
         OnModelUpdated();
+    }
+
+    private void setStatusText()
+    {
+        if(this.reactorView == null || this.reactorModel == null)
+        {
+            return;
+        }
+
+        //update our button text
+        final boolean poweredOn = this.reactorModel.isPoweredOn();
+        this.reactorView.setButtonText(poweredOn ? "Power Off" : "Power On");
+        this.reactorView.setStatusTextColour(poweredOn ? Color.GREEN : Color.RED);
     }
 
     //Our on/off button has been clicked
@@ -61,7 +80,7 @@ public class ReactorController implements ActionListener, ModelListenerInterface
         this.reactorModel.setState(this.reactorModel.isPoweredOn() ? ReactorState.State_Off : ReactorState.State_On);
 
         //update our button text
-        this.reactorView.setButtonText(this.reactorModel.isPoweredOn() ? "Power Off" : "Power On");
+        setStatusText();
     }
 
     @Override

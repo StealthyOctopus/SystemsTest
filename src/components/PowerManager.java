@@ -23,9 +23,6 @@ public class PowerManager implements Tickable
     private ReactorModel reactor;
 
     private float generatedPower = 0.0f;
-    private float lastPowerOutput = -1.0f;
-
-    private boolean newSystemAdded = false;
 
     //map our interfaces systems by priority, with the array list allowing us to have several systems at the same priority
     private Map<Integer, ArrayList<PoweredSystemModel>> poweredSystems;
@@ -43,7 +40,8 @@ public class PowerManager implements Tickable
 
     public void AddPoweredSystem(PoweredSystemModel system, Integer priority)
     {
-        if (!this.poweredSystems.containsKey(priority)) {
+        if (!this.poweredSystems.containsKey(priority))
+        {
             this.poweredSystems.put(priority, new ArrayList<PoweredSystemModel>());
         }
 
@@ -54,9 +52,6 @@ public class PowerManager implements Tickable
 
         //put back into Map
         this.poweredSystems.put(priority, systems);
-
-        //ensure we update all systems in next tick as the power distribution will change
-        this.newSystemAdded = true;
     }
 
     @Override
@@ -69,17 +64,6 @@ public class PowerManager implements Tickable
 
         //get the amount of power we have to share, this will be reduced as we transfer the power to systems
         this.generatedPower = this.reactor.getCurrentPowerOutput();
-
-        //If the power is the same as the last frame, no need to adjust power (assuming power is distributed the same and we havent updated systems priorities, which currently is not allowed)
-        if(this.generatedPower == this.lastPowerOutput && !this.newSystemAdded)
-            return;
-
-        //update the last output value
-        this.lastPowerOutput = this.generatedPower;
-
-        //if we added a new system since last tick we can set this to false now as it will be updated below
-        if(this.newSystemAdded)
-            this.newSystemAdded = false;
 
         //save this value to compare what we made use of verses the reactors current output
         final float powerDrawnFromReactor = this.generatedPower;
@@ -112,11 +96,10 @@ public class PowerManager implements Tickable
         //TODO: in future we could check how many times our adjustments have failed and look to turn off a system
         this.reactor.tryAdjustOutput(-powerDiff);
 
-        //TODO: store remaining power
         //if we have too much power, consider storing it as a buffer in case the output is too low in future
         if(powerDiff > 0.0f)
         {
-            ///store
+            //TODO: store remaining power
         }
 
     }

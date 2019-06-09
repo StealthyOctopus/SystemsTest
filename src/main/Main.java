@@ -1,7 +1,7 @@
 package main;
 
 import components.PowerManager;
-import components.controllers.LifeSupportSystemController;
+import components.controllers.LifeSupportController;
 import components.controllers.ReactorController;
 import components.models.LifeSupportModel;
 import components.models.ReactorModel;
@@ -24,7 +24,7 @@ public class Main
         //Create our "engine" to manage our tickable objects, updating them each frame
         logger.LogString("Creating Engine", utils.LogLevel.VERBOSE);
 
-        core.Engine e = new core.Engine(30);
+        core.Engine e = new core.Engine(120);
 
         //Now we can create come components and add them to our engine to keep them updated
         logger.LogString("Creating reactor...");
@@ -56,7 +56,7 @@ public class Main
         mainWindow.addPanel(lifeSupportView.getRootPanel());
 
         //Create life support controller to manage view interactions
-        LifeSupportSystemController l = new LifeSupportSystemController(lifeSupportSystem, lifeSupportView);
+        LifeSupportController l = new LifeSupportController(lifeSupportSystem, lifeSupportView);
 
         //add life support to tickables
         e.AddTickable(lifeSupportSystem, TickableGroup.Default);

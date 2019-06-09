@@ -8,14 +8,14 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /*
-    LifeSupportSystemController bridges the gap between the model and view
+    LifeSupportController bridges the gap between the model and view
  */
-public class LifeSupportSystemController implements ModelListenerInterface, ChangeListener
+public class LifeSupportController implements ModelListenerInterface, ChangeListener
 {
     private LifeSupportModel model;
     private LifeSupportView view;
 
-    public LifeSupportSystemController(LifeSupportModel model, LifeSupportView view)
+    public LifeSupportController(LifeSupportModel model, LifeSupportView view)
     {
         this.model = model;
         this.view = view;
@@ -37,6 +37,9 @@ public class LifeSupportSystemController implements ModelListenerInterface, Chan
                 this.view.setNumberOfPeople(this.model.getNumberOfPeople());
             }
         }
+
+        //set initial values on view
+        OnModelUpdated();
     }
 
     @Override

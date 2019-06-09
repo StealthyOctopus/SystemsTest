@@ -31,11 +31,25 @@ public class LifeSupportView implements ChangeListener
             return;
         }
 
+        //check sliders max value is not smaller than the models current value
+        if(this.getPeopleSlider().getMaximum() < model.getNumberOfPeople())
+        {
+            this.getPeopleSlider().setMaximum(model.getNumberOfPeople());
+        }
+
+        //update slider value if different
+        if(this.getPeopleSlider().getValue() != model.getNumberOfPeople())
+        {
+            this.getPeopleSlider().setValue(model.getNumberOfPeople());
+        }
+
         //Update the labels
-        final String powerConsumptionString = String.format("%.2f", model.getAllowedPowerDraw());
+
+        //Power draw as a percentage
+        final String powerConsumptionString = String.format("%.2f%%", model.getPercentageDraw());
         this.powerConsumptionLabel.setText(powerConsumptionString);
         //set colour to indicate low power mode
-        this.powerConsumptionLabel.setForeground(model.getPercentageDraw() >= 100.0f ? Color.GREEN : Color.RED);
+        this.powerConsumptionLabel.setForeground(model.getPercentageDraw() >= model.getMinPercentToMaintainQuality() ? Color.GREEN : Color.RED);
 
         //set air quality string
         final String airQualityString = String.format("%.2f%%", model.getCurrentAirQuality());
@@ -64,6 +78,7 @@ public class LifeSupportView implements ChangeListener
 
     public void setNumberOfPeople(int num)
     {
-        this.numberOfPeopleLabel.setText("" +  num);
+        String postFix = (num == 1) ? "Person" : "People";
+        this.numberOfPeopleLabel.setText(String.format("%d %s", num, postFix));
     }
 }

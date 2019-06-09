@@ -7,6 +7,8 @@ The purpose of this project is to create the various systems you might have on a
 
 This is done as an exercise only.
 
+Note: the UI layouts and design is currently very basic and needs a lot of work
+
 Goals/To do
 
 -Create more "systems" once the framework has been set up to allow a system to run, in this case, draw power and perform functions

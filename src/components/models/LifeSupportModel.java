@@ -40,6 +40,11 @@ public class LifeSupportModel extends PoweredSystemModel implements Tickable, Lo
         this.setNumberOfPeople(numberOfPeople);
     }
 
+    public float getMinPercentToMaintainQuality()
+    {
+        return minPercentToMaintainQuality;
+    }
+
     public float getCurrentAirQuality()
     {
         return this.currentAirQuality;

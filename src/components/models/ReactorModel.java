@@ -27,9 +27,10 @@ public class ReactorModel implements Tickable, LoadSettingsInterface
     //Only allow one listener at present
     private ModelListenerInterface listener = null;
 
+    //Default constructor attempts to load settings from config
     public ReactorModel()
     {
-        this.LoadSettingsFromConfig("config/ReactorConfig.xml", "config/ReactorConfig.xsd");
+        this.LoadSettingsFromConfig("config/ReactorConfig.xml", "config/ReactorConfigSchema.xsd");
         this.state = ReactorState.State_Off;
         this.currentPowerOutput = 0.0f;
         this.latestPowerDelta = 0.0f;
@@ -59,8 +60,8 @@ public class ReactorModel implements Tickable, LoadSettingsInterface
     public void setCurrentPowerOutput(float currentPowerOutput)
     {
         //ensure value is within bounds
-        if(currentPowerOutput > this.maxPowerOutput)
-            currentPowerOutput = this.maxPowerOutput;
+        if(currentPowerOutput > this.powerOutput)
+            currentPowerOutput = this.powerOutput;
         else if(currentPowerOutput < 0.0f)
             currentPowerOutput = 0.0f;
 
@@ -107,6 +108,7 @@ public class ReactorModel implements Tickable, LoadSettingsInterface
         this.maxPowerOutput = maxPowerOutput;
     }
 
+    //Set state will notify a listener if bound that the model has updated
     public void setState(ReactorState state)
     {
         if(state != this.state)
@@ -149,6 +151,7 @@ public class ReactorModel implements Tickable, LoadSettingsInterface
         return this.state == ReactorState.State_On;
     }
 
+    //A power adjustment has been requested, move our target output towards requested amount
     public boolean tryAdjustOutput(final float adjustment)
     {
         //save calculating twice
@@ -189,6 +192,7 @@ public class ReactorModel implements Tickable, LoadSettingsInterface
         }
     }
 
+    //Generate power based on state
     private void GeneratePower(float dt)
     {
         switch (this.state) {
@@ -206,19 +210,26 @@ public class ReactorModel implements Tickable, LoadSettingsInterface
         }
     }
 
+    //State on: move output towards our target
     private void State_On(float dt)
     {
         final float currentOutput = this.getCurrentPowerOutput();
-        if (currentOutput < this.getTargetOutput())
+
+        //Ensure we don't exceed our max output if it has changed
+        final float target = Math.min(this.getTargetOutput(), this.getMaxPowerOutput());
+
+        //Move towards target
+        if (currentOutput < target)
         {
             this.setCurrentPowerOutput(currentOutput + this.getPowerUpSpeed() * dt);
         }
-        else if (currentOutput > this.getTargetOutput())
+        else if (currentOutput > target)
         {
             this.setCurrentPowerOutput(currentOutput - this.getPowerUpSpeed() * dt);
         }
     }
 
+    //State off: move output back to 0
     private void State_Off(float dt)
     {
         final float currentOutput = this.getCurrentPowerOutput();

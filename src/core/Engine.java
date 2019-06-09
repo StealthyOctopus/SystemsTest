@@ -1,6 +1,7 @@
 package core;
 
 import core.interfaces.Tickable;
+import utils.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class Engine implements Runnable
         this.lastMs = System.currentTimeMillis();
     }
 
+    //Adds an object that implements the Tickable interface, allowing the engine to update components each frame
     public void AddTickable(Tickable tickable, TickableGroup group)
     {
         if (!this.TickableObjectGroups.containsKey(group)) {
@@ -37,14 +39,14 @@ public class Engine implements Runnable
         this.TickableObjectGroups.put(group, tickablesInGroup);
     }
 
-    public void updateUI()
-    {
-    }
-
+    //Starts a thread to run our main game loop
     public void start()
     {
-        System.out.println("Starting engine thread");
-        if (t == null) {
+        Logger.getInstance().LogString("Starting engine thread");
+
+        //can only start once
+        if (t == null)
+        {
             t = new Thread(this, "Engine");
             t.start();
         }
@@ -52,7 +54,7 @@ public class Engine implements Runnable
 
     public void shutdown()
     {
-
+        //TODO: Handle shutddown
     }
 
     @Override
@@ -60,25 +62,40 @@ public class Engine implements Runnable
     {
         this.running = true;
 
-        while (this.running) {
+        //main engine loop
+        while (this.running)
+        {
             long now = System.currentTimeMillis();
             float dt = (now - this.lastMs) / 1000.0f;
-            if (dt >= this.targetDeltaTime) {
-                for (ArrayList<Tickable> Group : TickableObjectGroups.values()) {
-                    for (Tickable tickable : Group) {
-                        if (tickable != null) {
+
+            //Check enough time has passed since last tick to match target framerate
+            if (dt >= this.targetDeltaTime)
+            {
+                //For all tickable groups
+                for (ArrayList<Tickable> Group : TickableObjectGroups.values())
+                {
+                    //For all tickables in group
+                    for (Tickable tickable : Group)
+                    {
+                        //TODO: Remove dead objects
+                        if (tickable != null)
+                        {
                             tickable.Tick(dt);
                         }
                     }
                 }
 
+                //Update last ms count
                 this.lastMs = now;
             }
 
-            try {
+            //attempt to sleep thread until next tick is due
+            try
+            {
                 Thread.sleep((long) this.targetDeltaTime);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
+            }
+            catch (InterruptedException e)
+            {
                 e.printStackTrace();
             }
         }

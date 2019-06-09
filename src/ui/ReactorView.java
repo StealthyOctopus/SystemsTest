@@ -5,6 +5,7 @@ import components.models.ReactorModel;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 
 /*
     ReactorView
@@ -12,13 +13,14 @@ import javax.swing.event.ChangeListener;
 public class ReactorView implements ChangeListener
 {
     private JPanel contentPane;
-    private JLabel ReactorPowerDelta;
+    private JLabel ReactorPowerAdjustment;
     private JLabel ReactorStatus;
     private JLabel ReactorOutput;
     private JButton ToggleStateButton;
     private JSlider maxPowerSlider;
-    private JLabel maxPowerLabel;
+    private JLabel ReactorMaxPowerLabel;
     private JPanel rootPanel;
+    private JLabel ReactorTargetOutput;
 
     public ReactorView()
     {
@@ -36,13 +38,19 @@ public class ReactorView implements ChangeListener
 
         this.ReactorStatus.setText(model.getStateString());
         this.ReactorOutput.setText(String.format("%.2f", model.getCurrentPowerOutput()));
-        this.ReactorPowerDelta.setText(String.format("%.2f", model.getLatestPowerDelta()));
-        this.maxPowerLabel.setText(String.format("%.2f", model.getMaxPowerOutput()));
+        this.ReactorPowerAdjustment.setText(String.format("%.2f", model.getLatestPowerDelta()));
+        this.ReactorMaxPowerLabel.setText(String.format("%.2f", model.getMaxPowerOutput()));
+        this.ReactorTargetOutput.setText(String.format("%.2f", model.getTargetOutput()));
     }
 
     public void setButtonText(String text)
     {
         this.ToggleStateButton.setText(text);
+    }
+
+    public void setStatusTextColour(Color color)
+    {
+        this.ReactorStatus.setForeground(color);
     }
 
     public JButton getToggleButton()
@@ -65,6 +73,6 @@ public class ReactorView implements ChangeListener
     {
         //Slider updated, update label
         int newValue = this.maxPowerSlider.getValue();
-        this.maxPowerLabel.setText(String.format("%.2f", (float)newValue));
+        this.ReactorMaxPowerLabel.setText(String.format("%.2f", (float)newValue));
     }
 }
