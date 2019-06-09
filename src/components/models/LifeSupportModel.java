@@ -22,7 +22,7 @@ public class LifeSupportModel extends PoweredSystemModel implements Tickable, Lo
     //Values are per second
     private float reductionPerPerson = 5.0f;
     private float energyCostPerPerson = 20.0f;
-    private float minPercentToMaintainQuality = 0.5f;//50%
+    private float minPercentToMaintainQuality = 50.0f;//50%
 
     private int numberOfPeople;
 
