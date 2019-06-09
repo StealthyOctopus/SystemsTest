@@ -11,9 +11,17 @@ Note: the UI layouts and design is currently very basic and needs a lot of work
 
 # Requirements
 
-Project was created in the Intellij IDEA community edition IDE, and is currently not supported in other IDEs such as Eclipse due to dependancies on the Intellij UI Designer. I aim to resolve these dependancies in the future, but here is a link to the IDE <br>
+Project was created in the Intellij IDEA community edition IDE, and is currently not supported in other IDEs (such as Eclipse) due to dependancies on the Intellij UI Designer. I aim to resolve these dependancies in the future, but here is a link to the IDE for now. <br>
 
-https://www.jetbrains.com/idea/download/
+https://www.jetbrains.com/idea/download/<br />
+
+# Running
+
+To run the project, you must execute ther following command from within the same directory as the "SystemsTest.jar" file:<br />
+
+java -jar SystemsTest.jar<br />
+
+This ensures the configs are loaded correctly as there is currently not a way to specify where the program looks for the configs, and as such expects them in the config directory provided.
 
 # To do
 
