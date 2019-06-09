@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration [
+        <!ELEMENT configuration (numberOfPeople,reductionPerPerson,airQualityDangerLevel,energyCostPerPerson,minPercentToMaintainQuality)>
+        <!ELEMENT numberOfPeople (#PCDATA)>
+        <!ELEMENT reductionPerPerson (#PCDATA)>
+        <!ELEMENT airQualityDangerLevel (#PCDATA)>
+        <!ELEMENT energyCostPerPerson (#PCDATA)>
+        <!ELEMENT minPercentToMaintainQuality (#PCDATA)>
+        ]>
+<configuration>
+    <numberOfPeople>12</numberOfPeople>
+    <reductionPerPerson>5.0</reductionPerPerson>
+    <airQualityDangerLevel>25.0</airQualityDangerLevel>
+    <energyCostPerPerson>20.0</energyCostPerPerson>
+    <minPercentToMaintainQuality>50.0</minPercentToMaintainQuality>
+</configuration>

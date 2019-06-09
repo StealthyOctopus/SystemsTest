@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0a9419e-0ee2-4bdd-ad57-bf4bf66aaf3d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/LifeSupportConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config/LifeSupportConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/ReactorConfig.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/config/ReactorConfigSchema.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PowerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PowerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/controllers/LifeSupportSystemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/controllers/LifeSupportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/controllers/ReactorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/controllers/ReactorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/models/LifeSupportModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/models/LifeSupportModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/models/ReactorModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/models/ReactorModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/LifeSupportView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/LifeSupportView.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/LifeSupportView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/LifeSupportView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/MainDialog.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/MainDialog.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ReactorView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ReactorView.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ReactorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ReactorView.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -71,8 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/controllers/ReactorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="43" column="13" lean-forward="true" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+            <state relative-caret-position="270">
+              <caret line="27" column="37" lean-forward="true" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -246,16 +231,6 @@
             <path>
               <item name="SystemsTest" type="b2602c69:ProjectViewProjectNode" />
               <item name="SystemsTest" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SystemsTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SystemsTest" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SystemsTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SystemsTest" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -349,6 +324,9 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -413,7 +391,7 @@
     <frame x="0" y="0" width="2560" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1372315" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1372315" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -423,8 +401,8 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.32972974" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32972974" />
-      <window_info anchor="bottom" id="Run" order="3" />
-      <window_info active="true" anchor="bottom" id="Debug" order="4" visible="true" weight="0.34594595" />
+      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.32972974" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.34594595" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
@@ -731,8 +709,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/controllers/ReactorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="43" column="13" lean-forward="true" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        <state relative-caret-position="270">
+          <caret line="27" column="37" lean-forward="true" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
         </state>
       </provider>
     </entry>
