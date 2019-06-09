@@ -1,15 +1,19 @@
 package components.models;
 
 import components.ReactorState;
+import components.models.interfaces.LoadSettingsInterface;
 import components.models.interfaces.ModelListenerInterface;
 import core.interfaces.Tickable;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import utils.ConfigurationLoader;
 
 
 //TODO: Less manual checks to see if a listener should be notified of changes
 //TODO: More reactor properties to be added, such as heat output, damage etc...
 //TODO: Potentially split reactor model class into smaller classes when we have lots of different property types (such as damage or heat if they become involved enough)
 
-public class ReactorModel implements Tickable
+public class ReactorModel implements Tickable, LoadSettingsInterface
 {
     private float powerOutput;
     private float powerUpSpeed;
@@ -22,6 +26,14 @@ public class ReactorModel implements Tickable
 
     //Only allow one listener at present
     private ModelListenerInterface listener = null;
+
+    public ReactorModel()
+    {
+        this.LoadSettingsFromConfig("config/ReactorConfig.xml", "config/ReactorConfig.xsd");
+        this.state = ReactorState.State_Off;
+        this.currentPowerOutput = 0.0f;
+        this.latestPowerDelta = 0.0f;
+    }
 
     public ReactorModel(float initialOutput, float maxPowerOutput)
     {
@@ -216,5 +228,47 @@ public class ReactorModel implements Tickable
             //clamp
             this.setCurrentPowerOutput(Math.max(this.getCurrentPowerOutput(), 0.0f));
         }
+    }
+
+    //Load our configuration from file
+    @Override
+    public boolean LoadSettingsFromConfig(String path, final String schemaPath)
+    {
+        //Use the generic loader to get a list of nodes from our XML config file
+        NodeList nodes = ConfigurationLoader.LoadNodesFromXML(path, schemaPath);
+
+        if(nodes == null)
+        {
+            return false;
+        }
+
+        for(int i = 0; i < nodes.getLength(); ++i)
+        {
+            Node node = nodes.item(i);
+
+            if (node != null && node.getNodeType() == Node.ELEMENT_NODE)
+            {
+                switch(node.getNodeName())
+                {
+                    case "maxPowerOutput":
+                        this.maxPowerOutput = Float.parseFloat(node.getTextContent());
+                        break;
+                    case "powerOutput":
+                        this.powerOutput = Float.parseFloat(node.getTextContent());
+                        break;
+                    case "powerUpSpeed":
+                        this.powerUpSpeed = Float.parseFloat(node.getTextContent());
+                        break;
+                    case "powerDownSpeed":
+                        this.powerDownSpeed = Float.parseFloat(node.getTextContent());
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        //assume success
+        return true;
     }
 }

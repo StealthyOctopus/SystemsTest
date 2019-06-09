@@ -118,6 +118,10 @@
           </grid>
         </children>
       </grid>
+      <component id="e25aa" class="javax.swing.JSeparator">
+        <constraints border-constraint="East"/>
+        <properties/>
+      </component>
     </children>
   </grid>
 </form>

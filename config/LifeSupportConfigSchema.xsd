@@ -1,0 +1,14 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="configuration">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:byte" name="numberOfPeople"/>
+                <xs:element type="xs:float" name="reductionPerPerson"/>
+                <xs:element type="xs:float" name="airQualityDangerLevel"/>
+                <xs:element type="xs:float" name="energyCostPerPerson"/>
+                <xs:element type="xs:float" name="minPercentToMaintainQuality"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+

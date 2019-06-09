@@ -17,6 +17,7 @@ public class MainDialog extends JDialog
     {
         setContentPane(contentPane);
         setModal(true);
+        setResizable(false);
         getRootPane().setDefaultButton(buttonQuit);
 
         //bind to quit

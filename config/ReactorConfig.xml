@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration [
+        <!ELEMENT configuration (powerOutput,maxPowerOutput,powerUpSpeed,powerDownSpeed)>
+        <!ELEMENT powerOutput (#PCDATA)>
+        <!ELEMENT maxPowerOutput (#PCDATA)>
+        <!ELEMENT powerUpSpeed (#PCDATA)>
+        <!ELEMENT powerDownSpeed (#PCDATA)>
+        ]>
+<configuration>
+    <powerOutput>100.0</powerOutput>
+    <maxPowerOutput>200.0</maxPowerOutput>
+    <powerUpSpeed>200.0</powerUpSpeed>
+    <powerDownSpeed>400.0</powerDownSpeed>
+</configuration>

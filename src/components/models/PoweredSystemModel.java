@@ -3,6 +3,9 @@ package components.models;
 import components.models.interfaces.ModelListenerInterface;
 import components.models.interfaces.PoweredModelInterface;
 
+/*
+    PoweredSystemModel provides common functionality across any powered subsystem, providing the variables used in the PowerModelInteface
+ */
 public class PoweredSystemModel implements PoweredModelInterface
 {
     protected float requiredPowerDraw = 0.0f;
