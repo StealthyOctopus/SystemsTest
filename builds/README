@@ -1,9 +1,9 @@
 SystemsTest README
 
-To run the SystemsTest.jar you must execute the following command from within the same directory as the "SystemsTest.jar" and configs folders:
+To run the SystemsTest.jar, the following command must be executed from within the same directory as the "SystemsTest.jar" and configs folders:
 
 java -jar SystemsTest.jar
 
-At present it is not possible to specify the directory to load the configs from, hence being in the same directory before launching.
+At present it is not possible to specify the directory to load the configs from, hence them being in the same directory before launching.
 
-This has been tested under linux and requireds java 11.
+This has been tested under linux and requires java 11.
