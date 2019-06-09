@@ -40,12 +40,24 @@ public class PowerManager implements Tickable
 
     public void AddPoweredSystem(PoweredSystemModel system, Integer priority)
     {
+        if(this.poweredSystems == null)
+        {
+            //TODO:Error handling
+            return;
+        }
+
         if (!this.poweredSystems.containsKey(priority))
         {
             this.poweredSystems.put(priority, new ArrayList<PoweredSystemModel>());
         }
 
         ArrayList<PoweredSystemModel> systems = this.poweredSystems.get(priority);
+
+        if(systems == null)
+        {
+            //TODO:Error handling
+            return;
+        }
 
         //Add to systems array list
         systems.add(system);
@@ -57,8 +69,10 @@ public class PowerManager implements Tickable
     @Override
     public void Tick(float dt)
     {
-        //check we have a valid ref
-        if (this.reactor == null) {
+        //safety checks
+        if (this.reactor == null || this.poweredSystems == null)
+        {
+            //TODO: Error handling
             return;
         }
 
@@ -77,9 +91,21 @@ public class PowerManager implements Tickable
             //get the array of systems at this priority level
             ArrayList<PoweredSystemModel> systems = this.poweredSystems.get(priorityLevel);
 
+            //safety check
+            if(systems == null)
+            {
+                continue;
+            }
+
             //now loop through the systems
             for (PoweredSystemModel system : systems)
             {
+                //Safety check
+                if(system == null)
+                {
+                    continue;
+                }
+
                 //only transfer power to system if we have any left
                 if (this.generatedPower > 0.0f)
                     transferPowerToSystem(system);

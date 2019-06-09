@@ -4,10 +4,7 @@ import components.models.interfaces.LoadSettingsInterface;
 import core.interfaces.Tickable;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import ui.LifeSupportView;
 import utils.ConfigurationLoader;
-
-import javax.xml.validation.Schema;
 
 /*
     LifeSupportModel extends PoweredSystemModel to hide away basic power changes

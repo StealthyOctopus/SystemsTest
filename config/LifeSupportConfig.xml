@@ -11,6 +11,6 @@
     <numberOfPeople>12</numberOfPeople>
     <reductionPerPerson>5.0</reductionPerPerson>
     <airQualityDangerLevel>25.0</airQualityDangerLevel>
-    <energyCostPerPerson>5.0</energyCostPerPerson>
+    <energyCostPerPerson>20.0</energyCostPerPerson>
     <minPercentToMaintainQuality>50.0</minPercentToMaintainQuality>
 </configuration>
