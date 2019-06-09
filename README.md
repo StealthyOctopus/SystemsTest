@@ -21,3 +21,4 @@ https://www.jetbrains.com/idea/download/
 -Add more detail to systems<br />
 -Create a user interface to allow systems to be added and removed by a user at runtime<br />
 -Load configurations for various models from disk (partially complete, basic XML configs have been added)<br />
+-Redesign UI to be more moduler and pleasing to the eye
