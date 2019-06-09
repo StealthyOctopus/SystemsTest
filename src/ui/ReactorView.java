@@ -6,6 +6,9 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/*
+    ReactorView
+ */
 public class ReactorView implements ChangeListener
 {
     private JPanel contentPane;
@@ -19,16 +22,22 @@ public class ReactorView implements ChangeListener
 
     public ReactorView()
     {
+        //bind to slider updates
         this.maxPowerSlider.addChangeListener(this::stateChanged);
     }
 
-    //Update UI with reactors state public
+    //Update UI with reactors info
     public void UpdateReactorModel(ReactorModel model)
     {
+        if(model == null)
+        {
+            return;
+        }
+
         this.ReactorStatus.setText(model.getStateString());
         this.ReactorOutput.setText(String.format("%.2f", model.getCurrentPowerOutput()));
         this.ReactorPowerDelta.setText(String.format("%.2f", model.getLatestPowerDelta()));
-        this.maxPowerLabel.setText(String.format("%f", model.getMaxPowerOutput()));
+        this.maxPowerLabel.setText(String.format("%.2f", model.getMaxPowerOutput()));
     }
 
     public void setButtonText(String text)
@@ -54,7 +63,8 @@ public class ReactorView implements ChangeListener
     @Override
     public void stateChanged(ChangeEvent changeEvent)
     {
-         int newValue = this.maxPowerSlider.getValue();
-         this.maxPowerLabel.setText(String.format("%.2f", (float)newValue));
+        //Slider updated, update label
+        int newValue = this.maxPowerSlider.getValue();
+        this.maxPowerLabel.setText(String.format("%.2f", (float)newValue));
     }
 }

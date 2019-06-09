@@ -3,6 +3,9 @@ package ui;
 import javax.swing.*;
 import java.awt.event.*;
 
+/*
+    MainDialog is our main window and base for other views to be attached
+ */
 public class MainDialog extends JDialog
 {
     private JPanel contentPane;
@@ -16,6 +19,7 @@ public class MainDialog extends JDialog
         setModal(true);
         getRootPane().setDefaultButton(buttonQuit);
 
+        //bind to quit
         buttonQuit.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -51,22 +55,20 @@ public class MainDialog extends JDialog
 
     public void addPanel(JPanel panel)
     {
-        //this.subContentPane.setLayout(new BoxLayout(this.subContentPane, BoxLayout.PAGE_AXIS));
         this.subContentPane.add(panel);
     }
 
     private void onOK()
     {
-        // add your code here
         dispose();
     }
 
     private void onCancel()
     {
-        // add your code here if necessary
         dispose();
     }
 
+    //TESTING UI Main entry
     public static void main(String[] args)
     {
         MainDialog dialog = new MainDialog();

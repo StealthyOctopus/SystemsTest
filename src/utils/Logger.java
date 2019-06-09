@@ -2,13 +2,12 @@ package utils;
 
 public class Logger
 {
-
-    //verbose by default for now
+    //verbose by default
     public LogLevel logLevel = LogLevel.VERBOSE;
 
     private static Logger instance = null;
 
-    // protected constructor
+    // private constructor
     private Logger()
     {
     }
@@ -17,14 +16,18 @@ public class Logger
     public static Logger getInstance()
     {
         if (instance == null)
+        {
             instance = new Logger();
+        }
 
         return instance;
     }
 
     public void LogString(String string, LogLevel logLevel)
     {
-        if (logLevel.getValue() >= this.logLevel.getValue()) {
+        //if log level is valid, print to console
+        if (logLevel.getValue() >= this.logLevel.getValue())
+        {
             System.out.println(string);
         }
     }

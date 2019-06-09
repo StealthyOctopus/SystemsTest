@@ -1,8 +1,8 @@
 package components.models;
 
 import components.ReactorState;
-import core.Tickable;
-import utils.Logger;
+import components.models.interfaces.ModelListenerInterface;
+import core.interfaces.Tickable;
 
 
 //TODO: Less manual checks to see if a listener should be notified of changes

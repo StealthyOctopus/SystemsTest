@@ -7,6 +7,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
+/*
+    LifeSupportView
+ */
 public class LifeSupportView implements ChangeListener
 {
     private JSlider numberOfPeople;
@@ -17,14 +20,16 @@ public class LifeSupportView implements ChangeListener
 
     public LifeSupportView()
     {
+        //bind to slider updates
+        this.getPeopleSlider().addChangeListener(this::stateChanged);
     }
 
     public void OnModelUpdated(LifeSupportModel model)
     {
         if(model == null)
+        {
             return;
-
-        this.getPeopleSlider().addChangeListener(this::stateChanged);
+        }
 
         //Update the labels
         final String powerConsumptionString = String.format("%.2f", model.getAllowedPowerDraw());
@@ -52,6 +57,7 @@ public class LifeSupportView implements ChangeListener
     @Override
     public void stateChanged(ChangeEvent changeEvent)
     {
+        //slider updated
         this.setNumberOfPeople(this.numberOfPeople.getValue());
     }
 

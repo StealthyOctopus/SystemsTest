@@ -1,7 +1,6 @@
 package components.models;
 
-import core.Tickable;
-import utils.Logger;
+import core.interfaces.Tickable;
 
 public class LifeSupportModel extends PoweredSystemModel implements Tickable
 {
@@ -69,7 +68,7 @@ public class LifeSupportModel extends PoweredSystemModel implements Tickable
         notifyListenerIfBound();
     }
 
-    //improve air quality
+    //update air quality based on current power levels & number of people
     private void filterAir(float dt)
     {
         //normalise percentage value before making calculations
@@ -80,7 +79,7 @@ public class LifeSupportModel extends PoweredSystemModel implements Tickable
         float changeInQuality = (normalisedPercentage - this.minPercentToMaintainQuality) * this.reductionPerPerson * this.numberOfPeople;
 
         //Get new air quality after the change
-        float newAirQuality = this.currentAirQuality + changeInQuality;
+        float newAirQuality = this.currentAirQuality + changeInQuality * dt;
 
         //finally update our currentAirQuality var, ensuring it is within bounds
         this.setCurrentAirQualityClamped(newAirQuality);

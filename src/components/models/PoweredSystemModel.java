@@ -1,5 +1,8 @@
 package components.models;
 
+import components.models.interfaces.ModelListenerInterface;
+import components.models.interfaces.PoweredModelInterface;
+
 public class PoweredSystemModel implements PoweredModelInterface
 {
     protected float requiredPowerDraw = 0.0f;

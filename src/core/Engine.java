@@ -1,9 +1,13 @@
 package core;
 
+import core.interfaces.Tickable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+    Engine class is intended to keep components ticking at a constant rate
+ */
 public class Engine implements Runnable
 {
     private Map<TickableGroup, ArrayList<Tickable>> TickableObjectGroups;

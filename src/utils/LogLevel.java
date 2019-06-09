@@ -1,5 +1,8 @@
 package utils;
 
+/*
+    LogLevel enum with int values for easy comparison
+ */
 public enum LogLevel
 {
     NONE(0),

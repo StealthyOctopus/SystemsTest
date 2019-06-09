@@ -1,5 +1,7 @@
 package components;
-
+/*
+    Reactor state enum
+ */
 public enum ReactorState
 {
     State_Off,
