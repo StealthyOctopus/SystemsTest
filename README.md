@@ -9,9 +9,15 @@ This is done as an exercise only.
 
 Note: the UI layouts and design is currently very basic and needs a lot of work
 
-Goals/To do
+# Requirements
 
--Create more "systems" once the framework has been set up to allow a system to run, in this case, draw power and perform functions
--Add more detail to systems
--Create a user interface to allow systems to be added and removed by a user at runtime
--Load configurations for various models from disk (partially complete, basic XML configs have been added)
+Project was created in the Intellij IDEA community edition IDE, and is currently not supported in other IDEs such as Eclipse due to dependancies on the Intellij UI Designer. I aim to resolve these dependancies in the future, but here is a link to the IDE <br>
+
+https://www.jetbrains.com/idea/download/
+
+# To do
+
+-Create more "systems" once the framework has been set up to allow a system to run, in this case, draw power and perform functions<br />
+-Add more detail to systems<br />
+-Create a user interface to allow systems to be added and removed by a user at runtime<br />
+-Load configurations for various models from disk (partially complete, basic XML configs have been added)<br />
