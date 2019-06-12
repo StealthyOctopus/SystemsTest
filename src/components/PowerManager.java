@@ -97,6 +97,12 @@ public class PowerManager implements Tickable
                 continue;
             }
 
+            //Check how much power will be requested ahead of time, so we know if we'll need to divide up power
+            final float totalPowerRequestedAtPriority = this.getTotalPowerRequirement(systems);
+            final boolean enoughPower = totalPowerRequestedAtPriority <= this.generatedPower;
+            //remaining power is used when enough power is set to false
+            final float remainingPower = this.generatedPower;
+
             //now loop through the systems
             for (PoweredSystemModel system : systems)
             {
@@ -108,7 +114,18 @@ public class PowerManager implements Tickable
 
                 //only transfer power to system if we have any left
                 if (this.generatedPower > 0.0f)
-                    transferPowerToSystem(system);
+                {
+                    float powerAmountRequest = this.getSystemsRequestedPower(system);
+                    //If we do not have enough power to give all systems what they requested, reduce the power given to them ensuring all systems get a percentage of the remaining power
+                    if(!enoughPower && totalPowerRequestedAtPriority > 0.0f)
+                    {
+                        //calculate percentage of total power this system requested
+                        final float normalizedPercentage = powerAmountRequest / totalPowerRequestedAtPriority;
+                        //give the system the same percentage, but of the remaining power value instead
+                        powerAmountRequest = normalizedPercentage * remainingPower;
+                    }
+                    transferPowerToSystem(system, powerAmountRequest);
+                }
 
                 //Increment the total power requested by all systems this frame
                 totalPowerRequested += getSystemsRequestedPower(system);
@@ -130,6 +147,19 @@ public class PowerManager implements Tickable
 
     }
 
+    private final float getTotalPowerRequirement(ArrayList<PoweredSystemModel> systems)
+    {
+        float total = 0.0f;
+
+        for(PoweredSystemModel system : systems)
+        {
+            //getSystemsRequestedPower has a safety check for null systems, so no need to duplicate here
+            total += this.getSystemsRequestedPower(system);
+        }
+
+        return total;
+    }
+
     //Helper to include safety checks when requesting a systems current  power draw
     private final float getSystemsRequestedPower(PoweredSystemModel system)
     {
@@ -144,14 +174,24 @@ public class PowerManager implements Tickable
             //how much power does the system want to function at 100%
             final float powerRequested = this.getSystemsRequestedPower(system);
 
+            //call transfer with fixed amount
+            this.transferPowerToSystem(system, powerRequested);
+        }
+    }
+
+    //transfers power to a system, providing a fixed  amount to be used
+    private void transferPowerToSystem(PoweredSystemModel system, final float powerAmount)
+    {
+        if (system != null)
+        {
             //power allowed cannot be greater than the remaining power we transferred from the reactor at the start of this update
-            final float powerAllowed = (powerRequested <= this.generatedPower) ? powerRequested : this.generatedPower;
+            final float powerAllowed = (powerAmount <= this.generatedPower) ? powerAmount : this.generatedPower;
 
             //set the systems allowed power (also recalculates the power percentage for convenience)
             system.setAllowedPowerDraw(powerAllowed);
 
             //the power has now been used
-            this.generatedPower = Math.max(this.generatedPower - powerRequested, 0.0f);
+            this.generatedPower = Math.max(this.generatedPower - powerAmount, 0.0f);
         }
     }
 }
