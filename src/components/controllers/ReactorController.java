@@ -24,7 +24,7 @@ public class ReactorController implements ActionListener, ModelListenerInterface
         this.reactorModel = reactorModel;
         this.reactorView = reactorView;
 
-        //bind listener so that we rare notified when the model updates
+        //bind listener so that we are notified when the model updates
         if(this.reactorModel != null)
         {
             this.reactorModel.setListener(this::OnModelUpdated);
@@ -40,7 +40,6 @@ public class ReactorController implements ActionListener, ModelListenerInterface
 
                 //set colour to match state
                 setStatusText();
-
             }
 
             //Bind to reactors on/off button

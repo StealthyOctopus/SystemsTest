@@ -3,12 +3,16 @@ package main;
 import components.PowerManager;
 import components.controllers.LifeSupportController;
 import components.controllers.ReactorController;
+import components.controllers.ShieldController;
 import components.models.LifeSupportModel;
 import components.models.ReactorModel;
+import components.models.ShieldModel;
+import core.SystemsFactory;
 import core.TickableGroup;
 import ui.LifeSupportView;
 import ui.MainDialog;
 import ui.ReactorView;
+import ui.ShieldView;
 import utils.Logger;
 
 public class Main
@@ -24,7 +28,7 @@ public class Main
         //Create our "engine" to manage our tickable objects, updating them each frame
         logger.LogString("Creating Engine", utils.LogLevel.VERBOSE);
 
-        core.Engine e = new core.Engine(120);
+        core.Engine engine = new core.Engine(120);
 
         //Now we can create come components and add them to our engine to keep them updated
         logger.LogString("Creating reactor...");
@@ -38,45 +42,49 @@ public class Main
         ReactorModel reactorModel = new ReactorModel();
         ReactorController reactorController = new ReactorController(reactorModel, reactorView);
 
-        //add reactor model to tickables
-        e.AddTickable(reactorModel, TickableGroup.Default);
-
         logger.LogString("creating power management system...");
 
         //Create the power manager, passing in the reactor
-        PowerManager p = new PowerManager(reactorModel);
+        PowerManager powerManager = new PowerManager(reactorModel);
 
-        //Add test system
-        LifeSupportModel lifeSupportSystem = new LifeSupportModel();
+        logger.LogString("creating systems factory...");
 
-        //View
-        LifeSupportView lifeSupportView = new LifeSupportView();
+        SystemsFactory systemsFactory = new SystemsFactory(powerManager, engine, mainWindow);
 
-        //Add view to main window
-        mainWindow.addPanel(lifeSupportView.getRootPanel());
-
-        //Create life support controller to manage view interactions
-        LifeSupportController l = new LifeSupportController(lifeSupportSystem, lifeSupportView);
-
-        //add life support to tickables
-        e.AddTickable(lifeSupportSystem, TickableGroup.Default);
-
-        //add initial systems to power manager
-        p.AddPoweredSystem(lifeSupportSystem);
+        if(systemsFactory == null)
+        {
+            System.exit(1);
+            return;
+        }
 
         //add power manager to tickables
-        e.AddTickable(p, TickableGroup.Default);
+        systemsFactory.AddTickable(powerManager);
+
+        //add reactor model to tickables
+        systemsFactory.AddTickable(reactorModel);
+
+        //----------------------CREATE POWERED SYSTEMS----------------------//
+
+        //Add a life support system
+        systemsFactory.AddNewPoweredSystem("LIFESUPPORT", 0);
+
+        //Add a shield system
+        systemsFactory.AddNewPoweredSystem("SHIELDS", 1);
+
+        //----------------------FINALIZE----------------------//
 
         logger.LogString("Starting Engine...");
 
         //Start the engine, kicking off the engine thread and component updates
-        e.start();
+        engine.start();
 
         logger.LogString("Engine initialised");
 
         //finalize window
         mainWindow.pack();
         mainWindow.setVisible(true);
+
+        //----------------------SHUTDOWN----------------------//
 
         System.exit(0);
     }
